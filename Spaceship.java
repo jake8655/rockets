@@ -9,12 +9,12 @@ public class Spaceship extends Actor {
     private int BOOST_DURATION = 2000;
 
     private int reloadCooldown;
+    // Have to use a list because of accurate time tracking of multiple boosts activated at
+    // once.
     private ArrayList<Long> boostStartTimes;
 
     public Spaceship(int initialScore, int initialSpeed) {
         this.reloadCooldown = 0;
-        // Have to use a list because of accurate time tracking of multiple boosts activated at
-        // once.
         this.boostStartTimes = new ArrayList<Long>();
 
         this.score = initialScore;
