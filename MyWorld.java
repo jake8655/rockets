@@ -24,8 +24,13 @@ public class MyWorld extends World {
         this.showText("Score2: " + this.players[1].getScore(), 750, 10);
 
         this.handleGameOver();
+
         this.spawnEntities(EnemyShip.class, 2);
-        this.spawnEntities(TurboBoost.class, 5);
+        this.spawnEntities(TurboBoost.class, 2);
+        this.spawnEntities(Shield.class, 2);
+        this.spawnEntities(RepairStation.class, 2);
+        this.spawnEntities(BlackHole.class, 2);
+        this.spawnEntities(Supernova.class, 2);
     }
 
     private void handleGameOver() {

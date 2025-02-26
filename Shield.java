@@ -1,8 +1,8 @@
 import greenfoot.*;
 
-public class TurboBoost extends Boost {
+public class Shield extends Boost {
     @Override
     protected void activateEffect(Spaceship ship) {
-        ship.increaseSpeed();
+        ship.activateShield();
     }
 }

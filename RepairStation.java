@@ -1,8 +1,8 @@
 import greenfoot.*;
 
-public class TurboBoost extends Boost {
+public class RepairStation extends Boost {
     @Override
     protected void activateEffect(Spaceship ship) {
-        ship.increaseSpeed();
+        ship.repair(20);
     }
 }

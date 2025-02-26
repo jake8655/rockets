@@ -7,7 +7,7 @@ public class Rocket extends Spaceship {
     private String SHOOT;
 
     public Rocket(String forward, String left, String right, String shoot) {
-        super(10, 1);
+        super(100, 1);
 
         this.getImage().scale(100, 65);
 
@@ -25,6 +25,10 @@ public class Rocket extends Spaceship {
     }
 
     private void handleMovement() {
+        if (this.frozen) {
+            return;
+        }
+
         if (Greenfoot.isKeyDown(this.FORWARD)) {
             this.move(this.currentSpeed);
         }
@@ -42,5 +46,10 @@ public class Rocket extends Spaceship {
         if (Greenfoot.isKeyDown(this.SHOOT)) {
             this.shoot();
         }
+    }
+
+    @Override
+    public void repair(int by) {
+        this.increaseScore(by);
     }
 }

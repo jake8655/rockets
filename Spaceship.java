@@ -2,7 +2,7 @@ import greenfoot.*;
 
 import java.util.ArrayList;
 
-public class Spaceship extends Actor {
+public abstract class Spaceship extends Actor {
     protected int score;
     protected int currentSpeed;
 
@@ -13,20 +13,33 @@ public class Spaceship extends Actor {
     // once.
     private ArrayList<Long> boostStartTimes;
 
+    private int shieldHealth;
+
+    protected boolean frozen;
+
     public Spaceship(int initialScore, int initialSpeed) {
         this.reloadCooldown = 0;
         this.boostStartTimes = new ArrayList<Long>();
 
         this.score = initialScore;
         this.currentSpeed = initialSpeed;
+        this.shieldHealth = 0;
+        this.frozen = false;
     }
 
-    public void increaseScore() {
-        this.score++;
+    public void increaseScore(int by) {
+        this.score += by;
     }
 
-    public void decreaseScore() {
-        this.score--;
+    public void decreaseScore(int by) {
+        if (this.shieldHealth - by >= 0) {
+            this.shieldHealth -= by;
+            return;
+        }
+
+        int toDecrease = by - this.shieldHealth;
+        this.shieldHealth = 0;
+        this.score -= toDecrease;
     }
 
     public int getScore() {
@@ -92,5 +105,19 @@ public class Spaceship extends Actor {
             }
         }
         this.boostStartTimes.removeAll(toRemove);
+    }
+
+    public void activateShield() {
+        this.shieldHealth = 20;
+    }
+
+    public abstract void repair(int by);
+
+    public void freeze() {
+        this.frozen = true;
+    }
+
+    public void unfreeze() {
+        this.frozen = false;
     }
 }

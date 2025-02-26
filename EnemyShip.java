@@ -8,15 +8,24 @@ public class EnemyShip extends Spaceship {
 
     private int movementDirection;
 
+    private int healRemaining;
+
     public EnemyShip() {
         super(5, 2);
         this.getImage().scale(110, 75);
 
         this.rotationChangeCooldown = 50;
         this.movementDirection = Greenfoot.getRandomNumber(360);
+
+        this.healRemaining = 0;
     }
 
     public void act() {
+        if (this.healRemaining > 0) {
+            this.healRemaining--;
+            this.increaseScore(1);
+        }
+
         super.act();
 
         this.handleMovement();
@@ -31,6 +40,10 @@ public class EnemyShip extends Spaceship {
     }
 
     private void handleMovement() {
+        if (this.frozen) {
+            return;
+        }
+
         if (this.rotationChangeCooldown <= 0) {
             this.rotationChangeCooldown = 50;
             this.movementDirection = Greenfoot.getRandomNumber(360);
@@ -66,5 +79,10 @@ public class EnemyShip extends Spaceship {
         }
 
         return closestPlayer;
+    }
+
+    @Override
+    public void repair(int by) {
+        this.healRemaining += by;
     }
 }

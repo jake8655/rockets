@@ -22,8 +22,8 @@ public class Bullet extends Actor {
             return;
         }
 
-        this.bulletOwner.increaseScore();
-        enemy.decreaseScore();
+        this.bulletOwner.increaseScore(1);
+        enemy.decreaseScore(1);
         world.removeObject(this);
     }
 }
